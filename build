@@ -39,7 +39,7 @@ cd "./emacs-emacs-${VERSION}"
 make -j $(nproc)
 
 sudo make install
-# sudo chown -R $USER "$INSTALL_DIR"
+sudo chown -R $USER "$INSTALL_DIR"
 
 # archive
 mkdir -p "$ROOT/out"
