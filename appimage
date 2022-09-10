@@ -1,0 +1,31 @@
+#!/bin/bash
+set -eu
+source "$(cd "$(dirname "$0")"; pwd)/config.sh"
+
+APP_DIR="$ROOT/tmp/AppDir/emacs.AppDir"
+
+# clean up
+rm -rf "$APP_DIR"
+mkdir -p "$APP_DIR"
+
+# copy files
+cp -r "$INSTALL_DIR" "$APP_DIR/usr" && chown -R $USER "$APP_DIR/usr"
+cp "$APP_DIR/usr/share/applications/emacs.desktop" "$APP_DIR/"
+cp "$APP_DIR/usr/share/icons/hicolor/scalable/apps/emacs.svg" "$APP_DIR/"
+cp "$ROOT/AppRun" "$APP_DIR/" && chmod a+x "$APP_DIR/AppRun"
+
+# create appimage
+set +u
+source "$ROOT/appimagetool/functions.sh"
+export PATH="$ROOT/appimagetool:$PATH"
+
+cd "$APP_DIR"
+copy_deps
+delete_blacklisted
+
+cd ../
+APP='emacs' generate_type2_appimage
+
+# copy executable
+cp ../out/Emacs*.AppImage ../out/emacs
+

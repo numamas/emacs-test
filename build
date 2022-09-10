@@ -1,0 +1,42 @@
+#!/bin/bash
+set -eu
+source "$(cd "$(dirname "$0")"; pwd)/config.sh"
+
+# dependencies
+sudo -E apt install -y autoconf pkg-config texinfo
+sudo -E apt install -y build-essential libncurses-dev libgnutls${GNUTLS_VERSION}-dev libjansson-dev
+
+# create working dir
+mkdir -p "$ROOT/tmp"
+cd "$ROOT/tmp"
+
+# retrieve emacs source
+if [ ! -e "./emacs-${VERSION}.tar.gz" ]; then
+    wget "https://github.com/emacs-mirror/emacs/archive/refs/tags/emacs-${VERSION}.tar.gz"
+fi
+
+# extract
+if [ ! -d "./emacs-emacs-${VERSION}" ]; then
+    tar zxf "emacs-${VERSION}.tar.gz"
+    # mv "emacs-emacs-${VERSION}" "emacs-${VERSION}"
+fi
+
+# build
+cd "./emacs-emacs-${VERSION}"
+./autogen.sh
+./configure --prefix="$INSTALL_DIR" \
+            --disable-build-details \
+            --without-all           \
+            --without-x             \
+            --without-pop           \
+            --with-xml2             \
+            --with-json             \
+            --with-gnutls           \
+            --with-zlib             \
+            --with-modules          \
+            --with-threads          \
+            --with-file-notification=yes
+make -j $(nproc)
+
+sudo make install
+# sudo chown -R $USER "$INSTALL_DIR"
