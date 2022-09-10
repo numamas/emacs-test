@@ -1,0 +1,13 @@
+name: 'emacs build'
+
+on:
+  push:
+    tags: 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: ./build
+      - run: ./appimage
