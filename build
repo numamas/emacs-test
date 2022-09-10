@@ -44,5 +44,5 @@ sudo make install
 # archive
 mkdir -p "$ROOT/out"
 cd "$INSTALL_DIR/.."
-tar zcf "$ROOT/out/emacs-$VERSION.tar.gz" 'emacs'
+tar zcf "$ROOT/out/emacs-${VERSION}-x86_64.tar.gz" 'emacs'
 

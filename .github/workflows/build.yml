@@ -1,10 +1,10 @@
-name: 'emacs build'
+name: Build Emacs
 
 on:
-  workflow_dispatch:
   push:
     tags:
-      'v*'
+      - "v[0-9]+.*"
+  workflow_dispatch:
 
 jobs:
   build:
@@ -13,4 +13,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: ./build
       - run: ./appimage
-      - run: ls out
+      - uses: actions/upload-artifact@v3
+        with:
+          name: output
+          path: out/
