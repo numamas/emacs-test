@@ -16,7 +16,5 @@ jobs:
         shell: cmd
       - run: dir C:\msys64
         shell: cmd
-      - run: dir C:\msys64\mingw64\
-        shell: cmd
-      - run: dir C:\msys64\mingw64\opt
+      - run: dir C:\msys64\opt
         shell: cmd
