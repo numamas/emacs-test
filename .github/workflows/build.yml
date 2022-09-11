@@ -18,6 +18,17 @@ jobs:
           name: output_linux
           path: out/
 
+  windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: msys2/setup-msys2@v2
+      - uses: action/checkout@v2
+      - run: ls -lh
+      - run: echo $SHELL
+
   publish:
     runs-on: ubuntu-latest
     needs: [linux]
@@ -25,7 +36,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: output_linux
-          
+
       - run: ls -lh
 
       - uses: softprops/action-gh-release@v1
