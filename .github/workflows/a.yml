@@ -11,4 +11,4 @@ jobs:
         shell: msys2 {0}
     steps:
       - uses: msys2/setup-msys2@v2
-      - run: ls -lh /
+      - run: ls -lh /mingw64
