@@ -11,9 +11,8 @@ jobs:
         shell: msys2 {0}
     steps:
       - uses: msys2/setup-msys2@v2
-        with:
-          update: true
-          install: >-
-            zip
-      - run: type zip
-      - run: type tar
+      - run: touch /opt/aaa
+      - run: dir C:\mingw64\
+        shell: cmd
+      - run: dir C:\mingw64\opt
+        shell: cmd
