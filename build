@@ -5,12 +5,14 @@ source "$(cd "$(dirname "$0")"; pwd)/config.sh"
 # dependencies
 case "$1" in
 'windows')
+    pacman -S --noconfirm mingw-w64-x86_64-gcc mingw-w64-x86_64-make
     pacman -S --noconfirm autoconf pkg-config texinfo
-    pacman -S --noconfirm mingw-w64-x86_64-gcc mingw-w64-x86_64-jansson mingw-w64-x86_64-gnutls
+    pacman -S --noconfirm mingw-w64-x86_64-gcc mingw-w64-x86_64-gnutls mingw-w64-x86_64-jansson
     ;;
 'linux')
+    sudo -E apt install -y build-essential
     sudo -E apt install -y autoconf pkg-config texinfo
-    sudo -E apt install -y build-essential libncurses-dev libgnutls${GNUTLS_VERSION}-dev libjansson-dev
+    sudo -E apt install -y libncurses-dev libgnutls${GNUTLS_VERSION}-dev libjansson-dev
     ;;
 esac
 
