@@ -51,17 +51,16 @@ case "$1" in
     # ./configure $options --prefix="$ROOT/emacs-w64"
     ./configure $options --prefix="$INSTALL_DIR" --with-toolkit-scroll-bars
     make -j $(nproc)
-    sudo make install-strip
-    sudo cp /c/msys64/mingw64/bin/*.dll "$INSTALL_DIR/bin/"
+    make install-strip
+    cp /c/msys64/mingw64/bin/*.dll "$INSTALL_DIR/bin/"
     ;;
 'linux')
     ./configure $options --prefix="$INSTALL_DIR" --without-x
     make -j $(nproc)
     sudo make install
+    sudo chown -R $USER "$INSTALL_DIR"
     ;;
 esac
-
-sudo chown -R $USER "$INSTALL_DIR"
 
 # archive
 ## linux
