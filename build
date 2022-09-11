@@ -5,9 +5,9 @@ source "$(cd "$(dirname "$0")"; pwd)/config.sh"
 # dependencies
 case "$1" in
 'windows')
-    pacman -S --noconfirm mingw-w64-x86_64-gcc make
+    pacman -S --noconfirm mingw-w64-x86_64-gcc make git
     pacman -S --noconfirm autoconf pkg-config texinfo
-    pacman -S --noconfirm mingw-w64-x86_64-gcc mingw-w64-x86_64-gnutls mingw-w64-x86_64-jansson
+    pacman -S --noconfirm mingw-w64-x86_64-gnutls mingw-w64-x86_64-jansson
     ;;
 'linux')
     sudo -E apt install -y build-essential
@@ -48,7 +48,6 @@ options+=' --with-file-notification=yes'
 
 case "$1" in
 'windows')
-    # ./configure $options --prefix="$ROOT/emacs-w64"
     ./configure $options --prefix="$INSTALL_DIR" --with-toolkit-scroll-bars
     make -j $(nproc)
     make install-strip
@@ -59,12 +58,12 @@ case "$1" in
     make -j $(nproc)
     sudo make install
     sudo chown -R $USER "$INSTALL_DIR"
+
+    # archive
+    mkdir -p "$ROOT/out"
+    cd "$INSTALL_DIR/.."
+    tar zcf "$ROOT/out/emacs-${VERSION}-${1}-x86_64.tar.gz" 'emacs'
     ;;
 esac
 
-# archive
-## linux
-mkdir -p "$ROOT/out"
-cd "$INSTALL_DIR/.."
-tar zcf "$ROOT/out/emacs-${VERSION}-${1}-x86_64.tar.gz" 'emacs'
 
