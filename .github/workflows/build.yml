@@ -31,11 +31,11 @@ jobs:
             zip
       - uses: actions/checkout@v2
       - run: ./build windows
-      - run: cd /opt && zip -r emacs-windows.zip emacs
+      - run: cd /opt && zip -r /c/emacs-windows.zip emacs
       - uses: actions/upload-artifact@v3
         with:
           name: output_windows
-          path: /opt/emacs-windows.zip
+          path: C:\emacs-windows.zip
 
   publish:
     runs-on: ubuntu-latest
