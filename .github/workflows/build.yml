@@ -43,7 +43,9 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name: output_linux
+          name:
+            - output_linux
+            - output_windows
 
       - run: ls -lh
 
