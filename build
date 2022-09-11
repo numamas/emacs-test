@@ -7,7 +7,7 @@ case "$1" in
 'windows')
     pacman -S --noconfirm mingw-w64-x86_64-gcc mingw-w64-x86_64-jansson mingw-w64-x86_64-gnutls
     ;;
-*)
+'linux')
     sudo -E apt install -y autoconf pkg-config texinfo
     sudo -E apt install -y build-essential libncurses-dev libgnutls${GNUTLS_VERSION}-dev libjansson-dev
     ;;
@@ -51,7 +51,7 @@ case "$1" in
     sudo make install-strip
     sudo cp /c/msys64/mingw64/bin/*.dll "$INSTALL_DIR/bin/"
     ;;
-*)
+'linux')
     ./configure $options --prefix="$INSTALL_DIR" --without-x
     make -j $(nproc)
     sudo make install
