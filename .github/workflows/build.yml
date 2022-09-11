@@ -43,13 +43,11 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name:
-            - output_linux
+          name: output_linux
 
       - uses: actions/download-artifact@v3
         with:
-          name:
-            - output_windows
+          name: output_windows
 
       - run: ls -lh
 
