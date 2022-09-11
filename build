@@ -49,7 +49,7 @@ options+=' --with-file-notification=yes'
 case "$1" in
 'windows')
     # ./configure $options --prefix="$ROOT/emacs-w64"
-    ./configure $options --prefix="$INSTALL_DIR"
+    ./configure $options --prefix="$INSTALL_DIR" --with-toolkit-scroll-bars
     make -j $(nproc)
     sudo make install-strip
     sudo cp /c/msys64/mingw64/bin/*.dll "$INSTALL_DIR/bin/"
