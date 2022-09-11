@@ -52,7 +52,7 @@ case "$1" in
     ./configure $options --prefix="$INSTALL_DIR" --with-toolkit-scroll-bars
     make -j $(nproc)
     make install-strip
-    cp /c/msys64/mingw64/bin/*.dll "$INSTALL_DIR/bin/"
+    cp /mingw64/bin/*.dll "$INSTALL_DIR/bin/"
     ;;
 'linux')
     ./configure $options --prefix="$INSTALL_DIR" --without-x
