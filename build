@@ -5,6 +5,7 @@ source "$(cd "$(dirname "$0")"; pwd)/config.sh"
 # dependencies
 case "$1" in
 'windows')
+    pacman -S --noconfirm autoconf pkg-config texinfo
     pacman -S --noconfirm mingw-w64-x86_64-gcc mingw-w64-x86_64-jansson mingw-w64-x86_64-gnutls
     ;;
 'linux')
