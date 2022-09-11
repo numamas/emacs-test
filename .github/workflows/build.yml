@@ -25,10 +25,12 @@ jobs:
         shell: msys2 {0}
     steps:
       - uses: msys2/setup-msys2@v2
+        with:
+          update: true
+          install: >-
+            zip
       - uses: actions/checkout@v2
       - run: ./build windows
-      - run: ls -lh
-      - run: ls -lh /opt/emacs
 
   publish:
     runs-on: ubuntu-latest
