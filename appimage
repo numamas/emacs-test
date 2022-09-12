@@ -27,6 +27,6 @@ cd ../
 APP='emacs' generate_type2_appimage
 
 # copy executable
-mkdir -p "$ROOT/tmp/out"
+mkdir -p "$ROOT/out"
 cp $ROOT/tmp/out/Emacs*.AppImage $ROOT/out/emacs-x86_64.AppImage
 
