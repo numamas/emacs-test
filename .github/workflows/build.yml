@@ -54,7 +54,5 @@ jobs:
       - uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: |
-            emacs-28.1-x86_64.tar.gz
-            emacs-x86_64.AppImage
-            emacs-windows.zip
+          files:
+              '*'
