@@ -28,15 +28,13 @@ fi
 # extract
 if [ ! -d "./emacs-emacs-${VERSION}" ]; then
     tar zxf "emacs-${VERSION}.tar.gz"
-    # mv "emacs-emacs-${VERSION}" "emacs-${VERSION}"
 fi
 
 # build
 cd "./emacs-emacs-${VERSION}"
 ./autogen.sh
 
-options="  --prefix='$INSTALL_DIR'"
-options+=' --disable-build-details'
+options='  --disable-build-details'
 options+=' --without-all'
 options+=' --without-pop'
 options+=' --with-xml2'
@@ -51,23 +49,17 @@ case "$1" in
 'windows')
     # CFLAGS='-O2 -march=x86-64 -mtune=generic -static -s -g0'
     CFLAGS='-O2 -march=x86-64 -static'
-    ./configure $options --with-toolkit-scroll-bars
+    ./configure $options --prefix="$INSTALL_DIR" --with-toolkit-scroll-bars
     make bootstrap -j $(nproc)
     make install-strip
     cp /mingw64/bin/*.dll "$INSTALL_DIR/bin/"
     ;;
 'linux')
     CFLAGS='-O2 -march=x86-64'
-    ./configure $options --without-x
+    ./configure $options --prefix="$INSTALL_DIR" --without-x
     make -j $(nproc)
     sudo make install
     sudo chown -R $USER "$INSTALL_DIR"
-
-    # archive
-    mkdir -p "$ROOT/out"
-    cd "$INSTALL_DIR/.."
-    tar zcf "$ROOT/out/emacs-${VERSION}-${1}-x86_64.tar.gz" 'emacs'
     ;;
 esac
-
 
